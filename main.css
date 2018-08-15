@@ -1,0 +1,68 @@
+body{
+    font-family: 'Jua', sans-serif;
+    width: 100%;
+    background-image: url('img/Europe.jpg');
+    margin: 0 auto;
+    text-align: center;
+}
+
+header{
+    padding-top: 40px;
+    padding-bottom: 20px;
+    font-size: 30px;
+
+}
+main{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+.count-display{
+    font-size: 25px;
+    font-weight: 300;
+    padding: 20px;
+
+}
+.selected-question{
+    width: 60%;
+    margin: 0 auto; 
+    font-size: 20px;
+    padding: 20px;
+    background-color: rgba(255,255,255, 0.7);
+    border-radius: 10px;
+}
+
+.answer-containers{
+    width: 60%;
+    margin: 0 auto;
+    padding: 40px 20px 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.answer-box{
+    width: 40%;
+    padding: 20px 10px;
+    border-radius: 10px;
+    color: white;
+}
+.answer-box.first{
+    background-color:#05668D;
+    font-size: 18px;
+    margin: 10px 30px 10px 30px;
+}
+.answer-box.second{
+    background-color:#679436;
+    font-size: 18px;
+    margin: 10px 30px 10px 20px;
+}
+.answer-box.third{
+    background-color:purple;
+    font-size: 18px;
+    margin: 10px 30px 10px 30px;
+}
+.answer-box.fourth{
+    background-color: #021C27;
+    font-size: 18px;
+    margin: 10px 30px 10px 20px;
+}
