@@ -1,3 +1,4 @@
+
 body{
     font-family: 'Jua', sans-serif;
     width: 100%;
@@ -17,6 +18,11 @@ main{
     margin: 0 auto;
     text-align: center;
 }
+section{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
 .count-display{
     font-size: 25px;
     font-weight: 300;
@@ -24,7 +30,8 @@ main{
 
 }
 .selected-question{
-    width: 60%;
+    width: 80%;
+    height: 60px;
     margin: 0 auto; 
     font-size: 20px;
     padding: 20px;
@@ -33,36 +40,43 @@ main{
 }
 
 .answer-containers{
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
     padding: 40px 20px 40px 20px;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    
 }
-
 .answer-box{
-    width: 40%;
-    padding: 20px 10px;
+    width: 20%;
+    padding: 20px 5px;
     border-radius: 10px;
     color: white;
 }
 .answer-box.first{
     background-color:#05668D;
-    font-size: 18px;
-    margin: 10px 30px 10px 30px;
+    font-size: 16px;
+
 }
 .answer-box.second{
     background-color:#679436;
-    font-size: 18px;
-    margin: 10px 30px 10px 20px;
+    font-size: 16px;
 }
 .answer-box.third{
     background-color:purple;
-    font-size: 18px;
-    margin: 10px 30px 10px 30px;
+    font-size: 16px;
 }
 .answer-box.fourth{
     background-color: #021C27;
-    font-size: 18px;
-    margin: 10px 30px 10px 20px;
+    font-size: 16px;
+}
+.display-answer {
+    width: 60%;
+    height: 40px;
+    margin: 0 auto; 
+    font-size: 20px;
+    padding: 20px;
+    background-color: rgba(255,255,255, 0.7);
+    border-radius: 10px;
+    color: black;
 }
