@@ -1,3 +1,5 @@
+
+  
 const europeQuestions = [
     {question: 'If you were to visit the town of Sintra, which country would you go?', answer: 'Portugal'},
     {question: 'While on a boat, you must dock at the Piraeus, which country should you be?', answer: 'Greece'},
@@ -15,7 +17,6 @@ const europeQuestions = [
     {question: 'You can visit the country that is the home of the world\'s most famous queen. Where will you go?', answer: 'United Kindgom'},
 ];
 const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'The Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom', 'United Kingdom'];
-const questionNumber = document.querySelector('.question-count-number');
 function randomIntergerUpto(max){
     return Math.floor(Math.random() * (max + 1) );
 }
@@ -36,8 +37,8 @@ for (let i =0; i<questionIndexes.length; i++){
     );
     }
     return randomQuestions;
-    
 }
+
 //select question element
 const questionToGuessElement = document.querySelector('.selected-question');
 //select boxes
@@ -52,7 +53,7 @@ function startRound(){
 
     correctCountryIndex = randomIntergerUpto(3);
 
-    
+    const questionNumber = displayQuestionNumber();
 
     //randomly select one of the selected questions
     const selectedQuestion = randomQuestions[correctCountryIndex].question;
@@ -67,6 +68,7 @@ function startRound(){
 
 }
 startRound();
+//check if clicked element corresponds to the right answer
 const evaluateRightAnswer = document.querySelector('.display-answer');
 
 function answerClick(event){
@@ -74,6 +76,7 @@ function answerClick(event){
     const clickedIndex = Number(button.getAttribute('data-index'));
     if(clickedIndex === correctCountryIndex) {
         evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
+        evaluateRightAnswer.style.backGroundColor =  rgba(255,255,255, 0)
     } else {
         evaluateRightAnswer.innerHTML = 'You should travel around more';
     }
@@ -84,12 +87,34 @@ for (let i = 0; i < countryOptionsElements.length; i++){
         answerClick
         );
 }
-//change question number
+
+//change question number - not working
 function displayQuestionNumber(){
-for (let n = 1; n < 20; n++){
-questionNumber.innnerHTML = 'n';
+let number = 1;
+const questionNumber = document.querySelector('.question-count-number');
+while (number < 20){
+questionNumber.innnerHTML = `${number}`;
+number++;
 }
-return questionNumber;
+
 }
-displayQuestionNumber();
+//take out selected question of the array and restart game
+function newRound() {
+    //remove selected question
+    europeQuestions.splice(randomQuestions[correctCountryIndex], 1);
+    //remove text
+    questionToGuessElement.innerHTML= '';
+    console.log(questionToGuessElement);
+    //remove countries from boxes
+    for (let i = 0; i < countryOptionsElements.length; i++){
+    countryOptionsElements[i].innerHTML= '';
+    }
+    console.log(countryOptionsElements);
+    startRound();
+}
+
 //next question
+const buttonNext = document.querySelector('.next-question');
+buttonNext.addEventListener('click', newRound);
+
+//take out selected question of the array

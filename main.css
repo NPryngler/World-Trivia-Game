@@ -79,4 +79,14 @@ section{
     background-color: rgba(255,255,255, 0.7);
     border-radius: 10px;
     color: black;
+    opacity: 
+}
+.next-question{
+    width: 20%;
+    padding: 10px 5px;
+    border-radius: 10px;
+    color: white;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: darkslategrey;
 }
