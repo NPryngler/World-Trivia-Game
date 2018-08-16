@@ -65,6 +65,8 @@ function startRound(){
         const countryOptionsElement = countryOptionsElements[i];
         countryOptionsElement.innerHTML = country.answer;
     }
+    //take out selected question of the array
+    europeQuestions.splice(randomQuestions[correctCountryIndex], 1);
 
 }
 startRound();
@@ -76,10 +78,15 @@ function answerClick(event){
     const clickedIndex = Number(button.getAttribute('data-index'));
     if(clickedIndex === correctCountryIndex) {
         evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
-        evaluateRightAnswer.style.backGroundColor =  rgba(255,255,255, 0)
+        evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
+        setTimeout(newRound(), 250);
     } else {
         evaluateRightAnswer.innerHTML = 'You should travel around more';
+        evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
+        newRound();
+        setTimeout(newRound(), 250);
     }
+console.log(europeQuestions.splice());
 }
 for (let i = 0; i < countryOptionsElements.length; i++){
     const countryOptionsElement = countryOptionsElements[i];
@@ -88,24 +95,15 @@ for (let i = 0; i < countryOptionsElements.length; i++){
         );
 }
 
-//change question number - not working
-function displayQuestionNumber(){
-let number = 1;
-const questionNumber = document.querySelector('.question-count-number');
-while (number < 20){
-questionNumber.innnerHTML = `${number}`;
-number++;
-}
 
-}
-//take out selected question of the array and restart game
+
+//Restart game next question
 function newRound() {
     //remove selected question
-    europeQuestions.splice(randomQuestions[correctCountryIndex], 1);
-    //remove text
     questionToGuessElement.innerHTML= '';
     console.log(questionToGuessElement);
-    //remove countries from boxes
+
+    // //remove countries from boxes
     for (let i = 0; i < countryOptionsElements.length; i++){
     countryOptionsElements[i].innerHTML= '';
     }
@@ -113,8 +111,20 @@ function newRound() {
     startRound();
 }
 
-//next question
-const buttonNext = document.querySelector('.next-question');
-buttonNext.addEventListener('click', newRound);
+//next question - not working
 
-//take out selected question of the array
+// const buttonNext = document.querySelector('.next-question');
+// buttonNext.addEventListener('click', newRound);
+// buttonNext.onclick = newRound();
+//
+//change question number - not working
+function displayQuestionNumber(){
+    let number = 1;
+    const questionNumber = document.querySelector('.question-count-number');
+    while (number < 10){
+    questionNumber.innnerHTML = `${number}`;
+    number++;
+    }
+}
+//run game until round 10 and score
+let score = 0;
