@@ -23,11 +23,11 @@ let europeQuestions = [
   { question: 'You can get to see the remains of the most famous wall of the modern age. Where will you go?', answer: 'Germany' },
   { question: 'You visit the place where the tie was invented (maybe to regret the fact).Where would you go?', answer: 'Croatia' },
   { question: 'You may greet the original Santa Klaus there in his homeland. Where will you go?', answer: 'Finland' },
-  { question: 'You can try some of the world\'s most renowned meatballs', answer: 'Sweden' },
+  { question: 'You can try some of the world\'s most renowned meatballs. Where will you go?', answer: 'Sweden' },
   { question: 'You can visit the country that is the home of the world\'s most famous queen. Where will you go?', answer: 'United Kindgom' },
 ];
 
-const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'The Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom', 'United Kingdom'];
+const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'The Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom', 'United Kingdom', 'Turkey', 'Ukraine'];
 let randomQuestionIndex = 0;
 let currentQuestion = {};
 let possibleAnswers = ['Austria', 'Belgium', 'Bulgaria', 'Croacia'];
@@ -94,11 +94,9 @@ function answerClick(event) {
   setTimeout(function (){
     questionNumber.innerHTML = `${round}`;
   }, 2000);
-  console.log(`the socre is ${score}`);
+  console.log(`the score is ${score}`);
   } else {
-  setTimeout(() => {
-    alert("You have finished the..")  
-  }, 2000);
+  setTimeout(rank, 2000);
   }
   // else some notification of score or total reset
 
@@ -113,7 +111,6 @@ for (let i = 0; i < countryOptionsElements.length; i++) {
 
 //Restart game next question
 function newQuestion() {
-  //take out object selected
   //remove selected question
   questionToGuessElement.innerHTML = '';
   //remove feedback box
@@ -126,11 +123,19 @@ function newQuestion() {
   startRound();
 }
 
+function rank(){
+  
+  if (score < 4) {
+    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. Go on and get that old backpack for a ride. You deserve some travelling!`
+  } else if (score < 7){
+    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. Good on you! We\'ve seen that you\'ve been around!!`
+  } else {
+    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. WOW! You have been doing some serious traveling`
+  }
+}
+
 
 startRound()
-
-
-//run game until round 10 and score
 
 // helper functions
 
@@ -149,7 +154,6 @@ function shuffle(array) {
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
     // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
@@ -159,10 +163,3 @@ function shuffle(array) {
   return array;
 }
 
-
-let number = 1
-function nextQuestionNumber(){
- number++;
- return number;
- questionNumber.innerHTML = `${number}`;
-}
