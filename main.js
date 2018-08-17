@@ -24,18 +24,11 @@ let europeQuestions = [
   { question: 'You can try some of the world\'s most renowned meatballs', answer: 'Sweden' },
   { question: 'You can visit the country that is the home of the world\'s most famous queen. Where will you go?', answer: 'United Kindgom' },
 ];
+
 const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'The Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom', 'United Kingdom'];
-
-
-
-// get one random question from europe questions by splicing it out of the Array. 
-// splice random one:
-let randomQuestionIndex = randomIntergerUpto(europeQuestions.length - 1);
+let randomQuestionIndex = 0;
 let currentQuestion = {};
-currentQuestion = europeQuestions.splice(randomQuestionIndex, 1);
-console.log(randomQuestionIndex);
-console.log(currentQuestion);
-console.log(europeQuestions);
+let possibleAnswers = ['Austria', 'Belgium', 'Bulgaria', 'Croacia'];
 
 // make a an array of 4 possible answers . one is going to be currentlquestion.answer and then pick three random countries from european countries but check that they don't equal actual answer
 
@@ -44,25 +37,45 @@ console.log(europeQuestions);
 // then display the four answers on the pageXOffset. 
 
 
-let questionIndexes = [];
+function populateAnswers() {
+  unshuffledPossibleAnswers = [];
+  console.log(currentQuestion.answer);
 
-function getRandomQuestions() {
-  while (questionIndexes.length < 3) {
-    const randomIndex = randomIntergerUpto(europeQuestions.length - 1)
-    if (!questionIndexes.includes(randomIndex)) {
-      questionIndexes.push(randomIndex);
+  unshuffledPossibleAnswers.push(currentQuestion.answer);
+
+  while (unshuffledPossibleAnswers.length < 4) {
+    const randomCountry = europeanCountries[randomIntergerUpto(europeanCountries.length - 1)];
+    let isAlreadyInArray = false;
+
+    for (let i = 0; i < unshuffledPossibleAnswers.length; i++) {
+      if (randomCountry === unshuffledPossibleAnswers[i]) isAlreadyInArray = true;
     }
+
+    if (!isAlreadyInArray) unshuffledPossibleAnswers.push(randomCountry);
   }
-  console.log(questionIndexes);
-  let randomQuestions = [];
-  for (let i = 0; i < questionIndexes.length; i++) {
-    randomQuestions.push(
-      europeQuestions[questionIndexes[i]]
-    );
-  }
-  randomQuestions.push(currentQuestion[0]);
-  return randomQuestions;
+
+  possibleAnswers = shuffle(unshuffledPossibleAnswers)
 }
+
+
+
+// function getRandomQuestions() {
+//   while (questionIndexes.length < 3) {
+//     const randomIndex = randomIntergerUpto(europeQuestions.length - 1)
+//     if (!questionIndexes.includes(randomIndex)) {
+//       questionIndexes.push(randomIndex);
+//     }
+//   }
+//   console.log(questionIndexes);
+//   let randomQuestions = [];
+//   for (let i = 0; i < questionIndexes.length; i++) {
+//     randomQuestions.push(
+//       europeQuestions[questionIndexes[i]]
+//     );
+//   }
+//   randomQuestions.push(currentQuestion[0]);
+//   return randomQuestions;
+// }
 
 // function shuffle(randomQuestions){
 //   let ctr = randomQuestions.length, temp, index;
@@ -79,23 +92,33 @@ function getRandomQuestions() {
 
 // let correctCountryIndex;
 // let chosenAnswerIndex;
-const randomQuestions = getRandomQuestions();
-console.log(randomQuestions);
+
+// console.log(randomQuestions);
 
 function startRound() {
-  getRandomQuestions();
+  // get one random question from europe questions by splicing it out of the Array. 
+  // splice random one:
+  randomQuestionIndex = randomIntergerUpto(europeQuestions.length - 1);
+  currentQuestion = europeQuestions.splice(randomQuestionIndex, 1)[0];
+  console.log(randomQuestionIndex);
+  console.log(currentQuestion);
+  console.log(europeQuestions);
+
+
+  populateAnswers();
+
 
   // const questionNumber = displayQuestionNumber();
   console.log(currentQuestion);
   //randomly select one of the selected questions
-  const selectedQuestion = currentQuestion[0].question;
+  const selectedQuestion = currentQuestion.question;
   //display selected question
   questionToGuessElement.innerHTML = selectedQuestion;
   //display random country's names in the boxes
   for (let i = 0; i < countryOptionsElements.length; i++) {
-    const country = randomQuestions[i];
+    const country = possibleAnswers[i];
     const countryOptionsElement = countryOptionsElements[i];
-    countryOptionsElement.innerHTML = country.answer;
+    countryOptionsElement.innerHTML = country;
   }
   //take out selected question of the array
   // europeQuestions.splice(randomQuestions[correctCountryIndex], 1);
@@ -109,17 +132,18 @@ function answerClick(event) {
   const clickedIndex = Number(button.getAttribute('data-index'));
   if (clickedIndex === 3) {
     evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
-    evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
-    setTimeout(newQuestion, 2000);
-    // setTimeout(displayQuestionNumber, 2000);
-
-
   } else {
     evaluateRightAnswer.innerHTML = 'You should travel around more';
-    evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
-    setTimeout(newQuestion, 2000);
-    // setTimeout(displayQuestionNumber, 2000);
   }
+
+  evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
+
+  // if round < 10
+
+  setTimeout(newQuestion, 2000);
+
+  // else some notification of score or total reset
+
   // removeAnsweredQuestion();
 }
 for (let i = 0; i < countryOptionsElements.length; i++) {
@@ -187,4 +211,25 @@ startRound()
 
 function randomIntergerUpto(max) {
   return Math.floor(Math.random() * (max + 1));
+}
+
+// Fisher-Yates (aka Knuth) Shuffle. Taken from
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
