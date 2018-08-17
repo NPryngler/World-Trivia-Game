@@ -20,10 +20,12 @@ let europeQuestions = [
 function randomIntergerUpto(max) {
   return Math.floor(Math.random() * (max + 1));
 }
+
+let numberOfQuestions;
 let questionIndexes = [];
-function getRandomQuestions() {
+function getRandomQuestions(numberOfQuestions) {
   
-  while (questionIndexes.length < 4) {
+  while (questionIndexes.length < numberOfQuestions) {
     const randomIndex = randomIntergerUpto(europeQuestions.length - 1)
     if (!questionIndexes.includes(randomIndex)) {
       questionIndexes.push(randomIndex);
@@ -38,28 +40,35 @@ function getRandomQuestions() {
   }
   return randomQuestions;
 }
-//display which question is being answered
+
+
+
+//element that display which question is being answered
 const questionNumber = document.querySelector('.question-count-number');
-//select question element
+//Question element
 const questionToGuessElement = document.querySelector('.selected-question');
-//select boxes
+//Answer boxes
 const countryOptionsElements = document.querySelectorAll('.answer-box');
 
 let correctCountryIndex;
 
 let chosenAnswerIndex;
 
-const randomQuestions = getRandomQuestions();
+//select 10 questions for the round
+let randomQuestions = getRandomQuestions(10);
 function startRound() {
-  getRandomQuestions();
-  correctCountryIndex = randomIntergerUpto(3);
+  while(randomQuestions.length<10){
+  getRandomQuestions(10);
+  let correctCountryIndex = questionsLoop();
+  
   chosenAnswerIndex = questionIndexes[correctCountryIndex]
   
   console.log(correctCountryIndex);
   console.log(chosenAnswerIndex);
   console.log(europeQuestions);
 
-  const questionNumber = displayQuestionNumber();
+  const questionNumber = displayQuestionNumber;
+  
 
   //randomly select one of the selected questions
   const selectedQuestion = randomQuestions[correctCountryIndex].question;
@@ -74,6 +83,7 @@ function startRound() {
   //take out selected question of the array
   // europeQuestions.splice(randomQuestions[correctCountryIndex], 1);
 
+}
 }
 startRound();
 
@@ -120,20 +130,20 @@ function newRound() {
 }
 
 //next question - not working
-
-// const buttonNext = document.querySelector('.next-question');
-// buttonNext.addEventListener('click', newRound);
-// buttonNext.onclick = newRound();
-//
-//change question number - not working
-function displayQuestionNumber() {
-  let number = 1;
-  const questionNumber = document.querySelector('.question-count-number');
-  while (number < 10) {
-    questionNumber.innnerHTML = `${number}`;
-    number++;
+function questionsLoop(){
+  for (let i=0; i<10; i++){
+    return randomQuestions[i];
   }
 }
+
+// function displayQuestionNumber() {
+//   let number = 1;
+//   const questionNumber = document.querySelector('.question-count-number');
+//   while (number < 10) {
+//     questionNumber.innnerHTML = `${number}`;
+//     number++;
+//   }
+// }
 //run game until round 10 and score
 let score = 0;
 
