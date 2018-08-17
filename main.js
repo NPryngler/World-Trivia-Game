@@ -6,6 +6,8 @@ const questionNumber = document.querySelector('.question-count-number');
 const questionToGuessElement = document.querySelector('.selected-question');
 //select boxes
 const countryOptionsElements = document.querySelectorAll('.answer-box');
+//element where the answer is displayed
+const evaluateRightAnswer = document.querySelector('.display-answer');
 
 
 let europeQuestions = [
@@ -29,13 +31,8 @@ const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus'
 let randomQuestionIndex = 0;
 let currentQuestion = {};
 let possibleAnswers = ['Austria', 'Belgium', 'Bulgaria', 'Croacia'];
-
-// make a an array of 4 possible answers . one is going to be currentlquestion.answer and then pick three random countries from european countries but check that they don't equal actual answer
-
-// shuffle that array somehow. 
-
-// then display the four answers on the pageXOffset. 
-
+let round = 1;
+let score = 0;
 
 function populateAnswers() {
   unshuffledPossibleAnswers = [];
@@ -57,60 +54,14 @@ function populateAnswers() {
   possibleAnswers = shuffle(unshuffledPossibleAnswers)
 }
 
-
-
-// function getRandomQuestions() {
-//   while (questionIndexes.length < 3) {
-//     const randomIndex = randomIntergerUpto(europeQuestions.length - 1)
-//     if (!questionIndexes.includes(randomIndex)) {
-//       questionIndexes.push(randomIndex);
-//     }
-//   }
-//   console.log(questionIndexes);
-//   let randomQuestions = [];
-//   for (let i = 0; i < questionIndexes.length; i++) {
-//     randomQuestions.push(
-//       europeQuestions[questionIndexes[i]]
-//     );
-//   }
-//   randomQuestions.push(currentQuestion[0]);
-//   return randomQuestions;
-// }
-
-// function shuffle(randomQuestions){
-//   let ctr = randomQuestions.length, temp, index;
-//   while (ctr>0){
-//     index = Math.floor(Math.random() * ctr);
-//     ctr--;
-//     temp = randomQuestions[index];
-//     randomQuestions = temp;
-//   }
-//   return randomQuestions;
-
-// }
-
-
-// let correctCountryIndex;
-// let chosenAnswerIndex;
-
-// console.log(randomQuestions);
-
 function startRound() {
   // get one random question from europe questions by splicing it out of the Array. 
   // splice random one:
   randomQuestionIndex = randomIntergerUpto(europeQuestions.length - 1);
   currentQuestion = europeQuestions.splice(randomQuestionIndex, 1)[0];
-  console.log(randomQuestionIndex);
-  console.log(currentQuestion);
-  console.log(europeQuestions);
-
 
   populateAnswers();
 
-
-  // const questionNumber = displayQuestionNumber();
-  console.log(currentQuestion);
-  //randomly select one of the selected questions
   const selectedQuestion = currentQuestion.question;
   //display selected question
   questionToGuessElement.innerHTML = selectedQuestion;
@@ -120,28 +71,35 @@ function startRound() {
     const countryOptionsElement = countryOptionsElements[i];
     countryOptionsElement.innerHTML = country;
   }
-  //take out selected question of the array
-  // europeQuestions.splice(randomQuestions[correctCountryIndex], 1);
+
 }
-
 //check if clicked element corresponds to the right answer
-const evaluateRightAnswer = document.querySelector('.display-answer');
-
 function answerClick(event) {
   const button = event.target;
   const clickedIndex = Number(button.getAttribute('data-index'));
-  if (clickedIndex === 3) {
+  console.log(clickedIndex);
+  
+  if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
     evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
+    score +=1;
   } else {
     evaluateRightAnswer.innerHTML = 'You should travel around more';
   }
 
   evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
-
+  round +=1
   // if round < 10
-
+  if (round <11){
   setTimeout(newQuestion, 2000);
-
+  setTimeout(function (){
+    questionNumber.innerHTML = `${round}`;
+  }, 2000);
+  console.log(`the socre is ${score}`);
+  } else {
+  setTimeout(() => {
+    alert("You have finished the..")  
+  }, 2000);
+  }
   // else some notification of score or total reset
 
   // removeAnsweredQuestion();
@@ -171,41 +129,8 @@ function newQuestion() {
 
 startRound()
 
-//next question - not working
-
-// const buttonNext = document.querySelector('.next-question');
-// buttonNext.addEventListener('click', newQuestion);
-// buttonNext.onclick = newQuestion();
-//
-//change question number - not working
-// function displayQuestionNumber() {
-//   const questionNumberElement = document.querySelector('.question-count-number');
-//   let number = questionNumberElement.parseInt();
-//   number += 1;
-//   questionNumberElement.innerHTML = `${number}`;
-// }
-
 
 //run game until round 10 and score
-
-
-
-// // take out answered question
-// function removeAnsweredQuestion() {
-//   // let answered = europeQuestions
-//   console.log(answered);
-//   let index;
-//   for (let x = 0; x < europeQuestions.length; x++) {
-//     if (europeQuestions[x] === answered) {
-//       index = europeQuestions.indexOf(europeQuestions[x]);
-//       europeQuestions.splice(index, 1);
-//     }
-//   }
-//   console.log(index);
-//   console.log(europeQuestions);
-// 
-
-
 
 // helper functions
 
@@ -232,4 +157,12 @@ function shuffle(array) {
   }
 
   return array;
+}
+
+
+let number = 1
+function nextQuestionNumber(){
+ number++;
+ return number;
+ questionNumber.innerHTML = `${number}`;
 }
