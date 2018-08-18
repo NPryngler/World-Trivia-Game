@@ -8,13 +8,18 @@ const questionToGuessElement = document.querySelector('.selected-question');
 const countryOptionsElements = document.querySelectorAll('.answer-box');
 //element where the answer is displayed
 const evaluateRightAnswer = document.querySelector('.display-answer');
-
+//element that contains the boxes
+const answersContainer = document.querySelector('.answer-containers');
+//element that contains cheer audio
+const rightAnswerAudio = document.querySelector('.cheers');
+//element that contains wrong answer audio
+const wrongAnswerAudio = document.querySelector('.wrong');
 
 let europeQuestions = [
   { question: 'If you were to visit the town of Sintra, which country would you go?', answer: 'Portugal' },
   { question: 'While on a boat, you must dock at the Piraeus, which country should you be?', answer: 'Greece' },
-  { question: 'Your flight you drop you at the Schiphol Airport. Which country will you land?', answer: 'The Netherlands' },
-  { question: 'You will explore some of the Basque provinces. Which of these countries will you go?', answer: 'Spain' },
+  { question: 'Your flight will you drop you at the Schiphol Airport. Which country will you land?', answer: 'The Netherlands' },
+  { question: 'You can explore some of the Basque provinces and visit a Guggenheim Museum. Which of these countries will you go?', answer: 'Spain' },
   { question: 'You will visit a country famous for its banks and watches? Which country will you go?', answer: 'Switzerland' },
   { question: 'You will taste the original Budweiser Budvar in its brewery. Which country will you go?', answer: 'Czech Republic' },
   { question: 'You may be able to see for yourself Mr. Dracula in Transylvania. Which country will you go?', answer: 'Romania' },
@@ -82,8 +87,10 @@ function answerClick(event) {
   if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
     evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
     score +=1;
+    rightAnswerAudio.play();
   } else {
-    evaluateRightAnswer.innerHTML = 'You should travel around more';
+    evaluateRightAnswer.innerHTML = 'Not this time :(';
+    wrongAnswerAudio.play();
   }
 
   evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
@@ -97,6 +104,8 @@ function answerClick(event) {
   console.log(`the score is ${score}`);
   } else {
   setTimeout(rank, 2000);
+  setTimeout(clearPage, 2000);
+
   }
   // else some notification of score or total reset
 
@@ -123,17 +132,25 @@ function newQuestion() {
   startRound();
 }
 
+//rank player
 function rank(){
   
   if (score < 4) {
-    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. Go on and get that old backpack for a ride. You deserve some travelling!`
+    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Go on and get that old backpack for a ride. You deserve some travelling!`
   } else if (score < 7){
-    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. Good on you! We\'ve seen that you\'ve been around!!`
+    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Good on you! We\'ve seen that you\'ve been around!!`
   } else {
-    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. WOW! You have been doing some serious traveling`
+    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> WOW! You have been doing some serious traveling`
   }
 }
-
+function clearPage() {
+  for (let i = 0; i < countryOptionsElements.length; i++){
+  answersContainer.removeChild(countryOptionsElements[i]);}
+  document.querySelector('.section').removeChild(questionToGuessElement);
+  evaluateRightAnswer.style.height = '100px';
+  evaluateRightAnswer.style.backgroundColor = 'orange';
+  evaluateRightAnswer.style.fontSize = '25px';
+};
 
 startRound()
 
