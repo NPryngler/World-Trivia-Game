@@ -142,6 +142,8 @@ font-size: 16px;
     margin-top: 20px;
 }
 
+.grab {cursor: -webkit-grab; cursor: grab;}
+
 @media screen and (max-width: 550px){
 body{
     width: 100%;
