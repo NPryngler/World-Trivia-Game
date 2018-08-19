@@ -40,7 +40,7 @@ section{
     margin: 0 auto; 
     font-size: 24px;
     padding: 20px;
-    background-color: rgba(255,10,100, 0.8);
+    background-color: rgba(255,255,255, 0.8);
     border-radius: 10px;
 }
 
@@ -85,6 +85,7 @@ section{
     background-color: rgba(255,255,255, 0.1);
     border-radius: 10px;
     color: black; 
+    animation: none;
 }
 /* .next-question{
     width: 20%;
@@ -95,6 +96,37 @@ section{
     font-size: 16px;
     background-color: darkslategrey;
 } */
+.continents-container{
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 20px 40px 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.continent-option{
+    width: 20%;
+    padding: 20px 5px;
+    border-radius: 10px;
+    color: white;
+}
+.continent-option.first{
+    background-color:#05668D;
+    font-size: 16px;
+
+}
+.continent-option.second{
+    background-color:#679436;
+    font-size: 16px;
+}
+.play-again{
+    width: 40%;
+    padding: 20px 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: rgba(240, 40, 100, 0.9);
+    font-size: 20px;
+    margin-bottom: 50px;
+}
 
 @media screen and (max-width: 550px){
 body{
@@ -105,4 +137,25 @@ body{
 body{
     width: 100%;
 }
+}
+@keyframes color-change{
+    0%{
+        background-color: orange;
+    }
+    25%{
+        background-color: yellow;
+    
+    }
+    50%{
+        background-color: purple;
+        color: white;
+    }
+    75%{
+        background-color: #05668D;
+        color: white;
+    }
+    100%{
+        background-color: green;
+        color: white;
+    }
 }

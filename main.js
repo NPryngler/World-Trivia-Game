@@ -16,6 +16,8 @@ const answersContainer = document.querySelector('.answer-containers');
 const rightAnswerAudio = document.querySelector('.cheers');
 //element that contains wrong answer audio
 const wrongAnswerAudio = document.querySelector('.wrong');
+//end-of-play audio element
+const holidayAudio = document.querySelector('.end-of-play');
 //element to change 
 const bodyBackground = document.getElementsByTagName('body');
 //element that contains the continent name
@@ -24,15 +26,22 @@ const headerTitle = document.querySelector('.continent-name');
 const continentContainer = document.querySelector('.continents-container');
 //element that contains the continents buttons
 const continentOptions = document.querySelectorAll('.continent-option');
-
+//add button
+const addButton = document.querySelector('.add-button');
+//play-again button
+const playAgain = document.querySelector('.play-again')
 
 headerTitle.innerHTML = 'Welcome to the world </br> traveler challenge!';
-questionToGuessElement.innerHTML = 'rules of the game'
+questionToGuessElement.innerHTML = 'Are you a traveler soul and dream about going to new places and visiting the world\'s 5 continents? </br> Let\'s see how good you are at this! </br> Just choose a continent and answer some traveler\'s quiz about the continent\'s countries.'
+questionToGuessElement.style.height = '140px';
+questionToGuessElement.style.padding = '30px';
+
 for (let i = 0; i < countryOptionsElements.length; i++) {
   answersContainer.removeChild(countryOptionsElements[i]);
 }
 countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
 countDisplay.style.color = 'rgba(255,255,255, 0.1)';
+
 
 function selectContinent(event) {
   const button = event.target;
@@ -84,8 +93,10 @@ function europe() {
       answersContainer.appendChild(countryOptionsElements[i]);
     }
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
-    countDisplay.style.color = 'black';  
+    countDisplay.style.color = 'black';
     headerTitle.innerHTML = 'Europe';
+    questionToGuessElement.style.height = '60px';
+    questionToGuessElement.style.padding = '20px';
     for (let i = 0; i < continentOptions.length; i++) {
       continentContainer.removeChild(continentOptions[i]);
     }
@@ -189,11 +200,11 @@ function europe() {
   function rank() {
 
     if (score < 4) {
-      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Go on and get that old backpack for a ride. You deserve some travelling!`
+      evaluateRightAnswer.innerHTML = `You\'ve got only ${score} right answers out of 10 😢 </br> Go on and get that old backpack for a ride. 🎒 </br> You deserve some travelling!😎`
     } else if (score < 7) {
-      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Good on you! We\'ve seen that you\'ve been around!!`
+      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Good on you! 🙌 We\'ve seen that you\'ve been around!! 😉`
     } else {
-      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> WOW! You have been doing some serious traveling`
+      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> WOW! 🤩 You have been doing some serious traveling 🛫`
     }
   }
   function clearPage() {
@@ -201,16 +212,20 @@ function europe() {
       answersContainer.removeChild(countryOptionsElements[i]);
     }
     document.querySelector('.section').removeChild(questionToGuessElement);
-    evaluateRightAnswer.style.height = '100px';
-    evaluateRightAnswer.style.backgroundColor = 'orange';
+    evaluateRightAnswer.style.height = '120px';
+    evaluateRightAnswer.style.padding = '30px';
+    evaluateRightAnswer.style.animation = 'color-change 3s linear infinite alternate';
     evaluateRightAnswer.style.fontSize = '25px';
+    countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
+    countDisplay.style.color = 'rgba(255,255,255, 0.1)';
+    holidayAudio.play();
   };
   stylePage();
   startRound()
 }
 
 //another continent
-function america(){
+function america() {
   console.log('america');
 }
 
