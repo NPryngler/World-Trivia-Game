@@ -2,7 +2,7 @@
 body{
     font-family: 'Jua', sans-serif;
     width: 100%;
-    background-image: url('img/Europe.jpg');
+    background-image: url('img/main2.jpg');
     margin: 0 auto;
     text-align: center;
 }
@@ -11,7 +11,6 @@ header{
     padding-top: 40px;
     padding-bottom: 20px;
     font-size: 30px;
-
 }
 main{
     width: 80%;
@@ -23,19 +22,25 @@ section{
     margin: 0 auto;
     text-align: center;
 }
+
 .count-display{
+    width: 20%;
+    margin: 0 auto;
+    margin-bottom: 10px;
     font-size: 25px;
     font-weight: 300;
     padding: 20px;
+    background-color: rgba(255,255,255, 0.8);
+    border-radius: 10px;
 
 }
 .selected-question{
     width: 80%;
     height: 60px;
     margin: 0 auto; 
-    font-size: 20px;
+    font-size: 24px;
     padding: 20px;
-    background-color: rgba(255,255,255, 0.7);
+    background-color: rgba(255,10,100, 0.8);
     border-radius: 10px;
 }
 
@@ -79,8 +84,7 @@ section{
     padding: 20px;
     background-color: rgba(255,255,255, 0.1);
     border-radius: 10px;
-    color: black;
-    opacity: 
+    color: black; 
 }
 /* .next-question{
     width: 20%;

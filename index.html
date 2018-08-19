@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 <body>
-    <div> 
+    <div class='background'> 
         <header>
             <h1 class='continent-name'>Europe</h1>
         </header>
@@ -17,6 +17,10 @@
             <h2 class='count-display'>Question <span class='question-count-number'>1</span> of 10</h2>
             <section class='section'>    
                 <div class='selected-question'>Question about an european country</div>
+                <div class='continents-container'>
+                    <button class='continent-option' data-type='0'>Europe</button>    
+                    <button class='continent-option' data-type='1'>America</button>
+                </div>
                 <div class='answer-containers'>
                     <button class='answer-box first' data-index='0'></button>
                     <button class='answer-box second' data-index='1'></button>
@@ -33,7 +37,8 @@
                 <!-- <button class='next-question'>Next question</button> -->
             </section>
         </main>
-    </div>
+    
     <script src="main.js"></script>
+    </div>
 </body>
 </html>

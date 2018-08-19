@@ -2,6 +2,8 @@
 // DOM elements
 //display which question is being answered
 const questionNumber = document.querySelector('.question-count-number');
+//
+const countDisplay = document.querySelector('.count-display');
 //select question element
 const questionToGuessElement = document.querySelector('.selected-question');
 //select boxes
@@ -14,145 +16,203 @@ const answersContainer = document.querySelector('.answer-containers');
 const rightAnswerAudio = document.querySelector('.cheers');
 //element that contains wrong answer audio
 const wrongAnswerAudio = document.querySelector('.wrong');
+//element to change 
+const bodyBackground = document.getElementsByTagName('body');
+//element that contains the continent name
+const headerTitle = document.querySelector('.continent-name');
+//element that contains the continents options
+const continentContainer = document.querySelector('.continents-container');
+//element that contains the continents buttons
+const continentOptions = document.querySelectorAll('.continent-option');
 
-let europeQuestions = [
-  { question: 'If you were to visit the town of Sintra, which country would you go?', answer: 'Portugal' },
-  { question: 'While on a boat, you must dock at the Piraeus, which country should you be?', answer: 'Greece' },
-  { question: 'Your flight will you drop you at the Schiphol Airport. Which country will you land?', answer: 'The Netherlands' },
-  { question: 'You can explore some of the Basque provinces and visit a Guggenheim Museum. Which of these countries will you go?', answer: 'Spain' },
-  { question: 'You will visit a country famous for its banks and watches? Which country will you go?', answer: 'Switzerland' },
-  { question: 'You will taste the original Budweiser Budvar in its brewery. Which country will you go?', answer: 'Czech Republic' },
-  { question: 'You may be able to see for yourself Mr. Dracula in Transylvania. Which country will you go?', answer: 'Romania' },
-  { question: 'Why dont you visit the largest city in Europe – that spans to Asia too. Where should you go?', answer: 'Turkey' },
-  { question: 'You can go to the birthplace of french-fries and have good beer too. Which country will you go?', answer: 'Belgium' },
-  { question: 'You can get to see the remains of the most famous wall of the modern age. Where will you go?', answer: 'Germany' },
-  { question: 'You visit the place where the tie was invented (maybe to regret the fact).Where would you go?', answer: 'Croatia' },
-  { question: 'You may greet the original Santa Klaus there in his homeland. Where will you go?', answer: 'Finland' },
-  { question: 'You can try some of the world\'s most renowned meatballs. Where will you go?', answer: 'Sweden' },
-  { question: 'You can visit the country that is the home of the world\'s most famous queen. Where will you go?', answer: 'United Kindgom' },
-];
 
-const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'The Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom', 'United Kingdom', 'Turkey', 'Ukraine'];
-let randomQuestionIndex = 0;
-let currentQuestion = {};
-let possibleAnswers = ['Austria', 'Belgium', 'Bulgaria', 'Croacia'];
-let round = 1;
-let score = 0;
+headerTitle.innerHTML = 'Welcome to the world </br> traveler challenge!';
+questionToGuessElement.innerHTML = 'rules of the game'
+for (let i = 0; i < countryOptionsElements.length; i++) {
+  answersContainer.removeChild(countryOptionsElements[i]);
+}
+countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
+countDisplay.style.color = 'rgba(255,255,255, 0.1)';
 
-function populateAnswers() {
-  unshuffledPossibleAnswers = [];
-  console.log(currentQuestion.answer);
+function selectContinent(event) {
+  const button = event.target;
+  const clickedContinent = Number(button.getAttribute('data-type'));
+  console.log(clickedContinent);
+  if (clickedContinent === 0) {
+    setTimeout(europe, 1000);
+  }
+  else {
+    setTimeout(america, 1000);
+  }
+}
 
-  unshuffledPossibleAnswers.push(currentQuestion.answer);
+for (let i = 0; i < continentOptions.length; i++) {
+  const continentOptionsElement = continentOptions[i];
+  continentOptionsElement.addEventListener('click',
+    selectContinent);
+}
 
-  while (unshuffledPossibleAnswers.length < 4) {
-    const randomCountry = europeanCountries[randomIntergerUpto(europeanCountries.length - 1)];
-    let isAlreadyInArray = false;
 
-    for (let i = 0; i < unshuffledPossibleAnswers.length; i++) {
-      if (randomCountry === unshuffledPossibleAnswers[i]) isAlreadyInArray = true;
+function europe() {
+  let europeQuestions = [
+    { question: 'If you were to visit the town of Sintra, which country would you go?', answer: 'Portugal' },
+    { question: 'While on a boat, you must dock at the Piraeus, which country should you be?', answer: 'Greece' },
+    { question: 'Your flight will you drop you at the Schiphol Airport. Which country will you land?', answer: 'The Netherlands' },
+    { question: 'You can explore some of the Basque provinces and visit a Guggenheim Museum. Which of these countries will you go?', answer: 'Spain' },
+    { question: 'You will visit a country famous for its banks and watches? Which country will you go?', answer: 'Switzerland' },
+    { question: 'You will taste the original Budweiser Budvar in its brewery. Which country will you go?', answer: 'Czech Republic' },
+    { question: 'You may be able to see for yourself Mr. Dracula in Transylvania. Which country will you go?', answer: 'Romania' },
+    { question: 'Why dont you visit the largest city in Europe – that spans to Asia too. Where should you go?', answer: 'Turkey' },
+    { question: 'You can go to the birthplace of french-fries and have good beer too. Which country will you go?', answer: 'Belgium' },
+    { question: 'You can get to see the remains of the most famous wall of the modern age. Where will you go?', answer: 'Germany' },
+    { question: 'You visit the place where the tie was invented (maybe to regret the fact).Where would you go?', answer: 'Croatia' },
+    { question: 'You may greet the original Santa Klaus there in his homeland. Where will you go?', answer: 'Finland' },
+    { question: 'You can try some of the world\'s most renowned meatballs. Where will you go?', answer: 'Sweden' },
+    { question: 'You can visit the country that is the home of the world\'s most famous queen. Where will you go?', answer: 'United Kindgom' },
+  ];
+
+
+  const europeanCountries = ['Austria', 'Belgium', 'Bulgaria', 'Croacia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'The Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom', 'United Kingdom', 'Turkey', 'Ukraine'];
+  let randomQuestionIndex = 0;
+  let currentQuestion = {};
+  let possibleAnswers = ['Austria', 'Belgium', 'Bulgaria', 'Croacia'];
+  let round = 1;
+  let score = 0;
+
+  function stylePage() {
+    for (let i = 0; i < countryOptionsElements.length; i++) {
+      answersContainer.appendChild(countryOptionsElements[i]);
+    }
+    countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
+    countDisplay.style.color = 'black';  
+    headerTitle.innerHTML = 'Europe';
+    for (let i = 0; i < continentOptions.length; i++) {
+      continentContainer.removeChild(continentOptions[i]);
+    }
+  }
+
+
+  function populateAnswers() {
+    unshuffledPossibleAnswers = [];
+    console.log(currentQuestion.answer);
+
+    unshuffledPossibleAnswers.push(currentQuestion.answer);
+
+    while (unshuffledPossibleAnswers.length < 4) {
+      const randomCountry = europeanCountries[randomIntergerUpto(europeanCountries.length - 1)];
+      let isAlreadyInArray = false;
+
+      for (let i = 0; i < unshuffledPossibleAnswers.length; i++) {
+        if (randomCountry === unshuffledPossibleAnswers[i]) isAlreadyInArray = true;
+      }
+
+      if (!isAlreadyInArray) unshuffledPossibleAnswers.push(randomCountry);
     }
 
-    if (!isAlreadyInArray) unshuffledPossibleAnswers.push(randomCountry);
+    possibleAnswers = shuffle(unshuffledPossibleAnswers)
   }
 
-  possibleAnswers = shuffle(unshuffledPossibleAnswers)
-}
+  function startRound() {
+    // get one random question from europe questions by splicing it out of the Array. 
+    // splice random one:
+    randomQuestionIndex = randomIntergerUpto(europeQuestions.length - 1);
+    currentQuestion = europeQuestions.splice(randomQuestionIndex, 1)[0];
 
-function startRound() {
-  // get one random question from europe questions by splicing it out of the Array. 
-  // splice random one:
-  randomQuestionIndex = randomIntergerUpto(europeQuestions.length - 1);
-  currentQuestion = europeQuestions.splice(randomQuestionIndex, 1)[0];
+    populateAnswers();
 
-  populateAnswers();
+    const selectedQuestion = currentQuestion.question;
+    //display selected question
+    questionToGuessElement.innerHTML = selectedQuestion;
+    //display random country's names in the boxes
+    for (let i = 0; i < countryOptionsElements.length; i++) {
+      const country = possibleAnswers[i];
+      const countryOptionsElement = countryOptionsElements[i];
+      countryOptionsElement.innerHTML = country;
+    }
 
-  const selectedQuestion = currentQuestion.question;
-  //display selected question
-  questionToGuessElement.innerHTML = selectedQuestion;
-  //display random country's names in the boxes
+  }
+  //check if clicked element corresponds to the right answer
+  function answerClick(event) {
+    const button = event.target;
+    const clickedIndex = Number(button.getAttribute('data-index'));
+    console.log(clickedIndex);
+
+    if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
+      evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
+      score += 1;
+      rightAnswerAudio.play();
+    } else {
+      evaluateRightAnswer.innerHTML = 'Not this time :(';
+      wrongAnswerAudio.play();
+    }
+
+    evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
+    round += 1
+    // if round < 10
+    if (round < 11) {
+      setTimeout(newQuestion, 2000);
+      setTimeout(function () {
+        questionNumber.innerHTML = `${round}`;
+      }, 2000);
+      console.log(`the score is ${score}`);
+    } else {
+      setTimeout(rank, 2000);
+      setTimeout(clearPage, 2000);
+
+    }
+    // else some notification of score or total reset
+
+    // removeAnsweredQuestion();
+  }
   for (let i = 0; i < countryOptionsElements.length; i++) {
-    const country = possibleAnswers[i];
     const countryOptionsElement = countryOptionsElements[i];
-    countryOptionsElement.innerHTML = country;
+    countryOptionsElement.addEventListener('click',
+      answerClick
+    );
   }
 
-}
-//check if clicked element corresponds to the right answer
-function answerClick(event) {
-  const button = event.target;
-  const clickedIndex = Number(button.getAttribute('data-index'));
-  console.log(clickedIndex);
-  
-  if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
-    evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
-    score +=1;
-    rightAnswerAudio.play();
-  } else {
-    evaluateRightAnswer.innerHTML = 'Not this time :(';
-    wrongAnswerAudio.play();
+  //Restart game next question
+  function newQuestion() {
+    //remove selected question
+    questionToGuessElement.innerHTML = '';
+    //remove feedback box
+    evaluateRightAnswer.innerHTML = '';
+    evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.1)';
+    // //remove countries from boxes
+    for (let i = 0; i < countryOptionsElements.length; i++) {
+      countryOptionsElements[i].innerHTML = '';
+    }
+    startRound();
   }
 
-  evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
-  round +=1
-  // if round < 10
-  if (round <11){
-  setTimeout(newQuestion, 2000);
-  setTimeout(function (){
-    questionNumber.innerHTML = `${round}`;
-  }, 2000);
-  console.log(`the score is ${score}`);
-  } else {
-  setTimeout(rank, 2000);
-  setTimeout(clearPage, 2000);
+  //rank player
+  function rank() {
 
+    if (score < 4) {
+      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Go on and get that old backpack for a ride. You deserve some travelling!`
+    } else if (score < 7) {
+      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Good on you! We\'ve seen that you\'ve been around!!`
+    } else {
+      evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> WOW! You have been doing some serious traveling`
+    }
   }
-  // else some notification of score or total reset
-
-  // removeAnsweredQuestion();
-}
-for (let i = 0; i < countryOptionsElements.length; i++) {
-  const countryOptionsElement = countryOptionsElements[i];
-  countryOptionsElement.addEventListener('click',
-    answerClick
-  );
-}
-
-//Restart game next question
-function newQuestion() {
-  //remove selected question
-  questionToGuessElement.innerHTML = '';
-  //remove feedback box
-  evaluateRightAnswer.innerHTML = '';
-  evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.1)';
-  // //remove countries from boxes
-  for (let i = 0; i < countryOptionsElements.length; i++) {
-    countryOptionsElements[i].innerHTML = '';
-  }
-  startRound();
+  function clearPage() {
+    for (let i = 0; i < countryOptionsElements.length; i++) {
+      answersContainer.removeChild(countryOptionsElements[i]);
+    }
+    document.querySelector('.section').removeChild(questionToGuessElement);
+    evaluateRightAnswer.style.height = '100px';
+    evaluateRightAnswer.style.backgroundColor = 'orange';
+    evaluateRightAnswer.style.fontSize = '25px';
+  };
+  stylePage();
+  startRound()
 }
 
-//rank player
-function rank(){
-  
-  if (score < 4) {
-    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Go on and get that old backpack for a ride. You deserve some travelling!`
-  } else if (score < 7){
-    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Good on you! We\'ve seen that you\'ve been around!!`
-  } else {
-    evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> WOW! You have been doing some serious traveling`
-  }
+//another continent
+function america(){
+  console.log('america');
 }
-function clearPage() {
-  for (let i = 0; i < countryOptionsElements.length; i++){
-  answersContainer.removeChild(countryOptionsElements[i]);}
-  document.querySelector('.section').removeChild(questionToGuessElement);
-  evaluateRightAnswer.style.height = '100px';
-  evaluateRightAnswer.style.backgroundColor = 'orange';
-  evaluateRightAnswer.style.fontSize = '25px';
-};
-
-startRound()
 
 // helper functions
 
