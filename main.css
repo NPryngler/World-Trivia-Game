@@ -108,6 +108,7 @@ section{
     padding: 20px 5px;
     border-radius: 10px;
     color: white;
+    font-weight: 500;
 }
 .continent-option.first{
     background-color:#05668D;
@@ -131,13 +132,14 @@ font-size: 16px;
     font-size: 16px;
 }
 .play-again{
-    width: 40%;
+    width: 20%;
     padding: 20px 5px;
     border-radius: 10px;
     color: white;
-    background-color: rgba(240, 40, 100, 0.9);
+    background-color: rgba(255,255,255, 0.1);
+    border: none;
     font-size: 20px;
-    margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 550px){
