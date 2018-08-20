@@ -40,9 +40,14 @@ for (let i = 0; i < countryOptionsElements.length; i++) {
   answersContainer.removeChild(countryOptionsElements[i]);
 }
 function startGame() {
+  console.log('starting game;');
+
   countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
   countDisplay.style.color = 'rgba(255,255,255, 0.1)';
 
+  function playAgain(){
+  evaluateRightAnswer.classList.toggle('hidden');
+  }
   function selectContinent(event) {
     const button = event.target;
     const clickedContinent = Number(button.getAttribute('data-type'));
@@ -107,7 +112,7 @@ function europe() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
     countDisplay.style.color = 'black';
     headerTitle.innerHTML = 'Europe';
-    questionToGuessElement.style.height = '60px';
+    questionToGuessElement.style.height = '80px';
     questionToGuessElement.style.padding = '20px';
     for (let i = 0; i < continentOptions.length; i++) {
       continentContainer.removeChild(continentOptions[i]);
@@ -171,7 +176,7 @@ function europe() {
 
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
     round += 1
-    // if round < 10
+
     if (round < 11) {
       setTimeout(newQuestion, 2000);
       setTimeout(function () {
@@ -183,9 +188,6 @@ function europe() {
       setTimeout(clearPage, 2000);
 
     }
-    // else some notification of score or total reset
-
-    // removeAnsweredQuestion();
   }
   for (let i = 0; i < countryOptionsElements.length; i++) {
     const countryOptionsElement = countryOptionsElements[i];
@@ -208,7 +210,7 @@ function europe() {
     startRound();
   }
 
-  //rank player
+
   function rank() {
 
     if (score < 4) {
@@ -238,7 +240,7 @@ function europe() {
   stylePage();
   startRound();
 }
-startGame();
+
 
 //America
 function america() {
@@ -273,7 +275,7 @@ function america() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
     countDisplay.style.color = 'black';
     headerTitle.innerHTML = 'America';
-    questionToGuessElement.style.height = '60px';
+    questionToGuessElement.style.height = '80px';
     questionToGuessElement.style.padding = '20px';
     for (let i = 0; i < continentOptions.length; i++) {
       continentContainer.removeChild(continentOptions[i]);
@@ -405,7 +407,7 @@ function asia() {
     { question: 'You can visit the land regarded by the Christian, Jewish and Muslim religious as the Holy Land, which country would you go?', answer: 'Israel' },
     { question: 'You can visit the famous Forbiden City and The Great Wall, which country should you be?', answer: 'China' },
     { question: 'You will visit the Taj Mahal and the coutry where the yoga and chess were invented. Which country will you go?', answer: 'India' },
-    { question: 'You can visit a small and predominantly Buddhist country that is also the only country in the world where tobacco is forbidden? Where will you go', answer: 'Bhutan' },
+    { question: 'You will go to a small and predominantly Buddhist country. It is also the only country in the world where tobacco is forbidden. Where will you go?', answer: 'Bhutan' },
     { question: 'You can visit more than 2,200 temples and pagodas in the Bagan plains. Which country you will go?', answer: 'Myanmar' },
     { question: 'You will visit the mythical island of Bali. Which country will you go?', answer: 'Indonesia' },
     { question: 'In the so-called \'Land of the rising sun\' you can see Mount Fuji. Which country will you go for that?', answer: 'Japan' },
@@ -431,7 +433,7 @@ function asia() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
     countDisplay.style.color = 'black';
     headerTitle.innerHTML = 'Asia';
-    questionToGuessElement.style.height = '60px';
+    questionToGuessElement.style.height = '80px';
     questionToGuessElement.style.padding = '20px';
     for (let i = 0; i < continentOptions.length; i++) {
       continentContainer.removeChild(continentOptions[i]);
@@ -723,9 +725,9 @@ function africa() {
 function oceania() {
 
   let oceaniaQuestions = [
-    { question: 'You can climb up the Mount Kilimanjaro. Which country will you go?', answer: 'Tanzania' },
-    { question: 'You can visit the Table Mountain and overlook the Cape Town Bay. Which country will you go?', answer: 'South Africa' },
-    { question: 'You will visit the world\'s most famous pyramides. Which country will you go?', answer: 'Egypt' },
+    { question: 'You can see Kangaroos and Koalas in their original habitat. Which country will you go?', answer: 'Australia' },
+    { question: 'You can greet the \'Kiwis\' and visit places where the \'Lord of the Rings\' thrilogy was filmed. Which country will you go?', answer: 'New Zealand' },
+    { question: 'You will visit one of the world\'s largest islands, that its also one of the least explored. Which country will you go?', answer: 'Papua New Guinea' },
     { question: 'You can visit the most populated country in Africa and the Niger River. Which country will you go?', answer: 'Nigeria' },
     { question: 'You can visit Mount Nimba, that rises above the savannah where this country meets with Guinea and Liberia. Which country will you go?', answer: 'Ivory Coast' },
     { question: 'You can travel to the largest island in Africa - and the 4th largest in the world. Which country will you go?', answer: 'Madagascar' },
@@ -878,7 +880,7 @@ function oceania() {
   startRound();
 }
 
-
+startGame();
 // helper functions
 
 function randomIntergerUpto(max) {
