@@ -8,4 +8,4 @@ The game consists of guessing the country where you can see or experience what's
 
 You have up to 10 questions for each continent.
 
-At the end of the quiz, we will tell you your score and tell you how much of a traveler you are.
+At the end of the quiz, we will tell you your score and how much of a traveler you are.
