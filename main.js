@@ -1,34 +1,32 @@
 
-// DOM elements
-//display which question is being answered
-const questionNumber = document.querySelector('.question-count-number');
-//
+const questionNumber = document.querySelector('.question-count-number')
+
 const countDisplay = document.querySelector('.count-display');
-//select question element
+
 const questionToGuessElement = document.querySelector('.selected-question');
-//select boxes
+
 const countryOptionsElements = document.querySelectorAll('.answer-box');
-//element where the answer is displayed
+
 const evaluateRightAnswer = document.querySelector('.display-answer');
-//element that contains the boxes
+
 const answersContainer = document.querySelector('.answer-containers');
-//element that contains cheer audio
+
 const rightAnswerAudio = document.querySelector('.cheers');
-//element that contains wrong answer audio
+
 const wrongAnswerAudio = document.querySelector('.wrong');
-//end-of-play audio element
+
 const holidayAudio = document.querySelector('.end-of-play');
-//element to change 
+ 
 const bodyBackground = document.getElementsByTagName('body');
-//element that contains the continent name
+
 const headerTitle = document.querySelector('.continent-name');
-//element that contains the continents options
+
 const continentContainer = document.querySelector('.continents-container');
-//element that contains the continents buttons
+
 const continentOptions = document.querySelectorAll('.continent-option');
-//add button
+
 const addButton = document.querySelector('.add-button');
-//play-again button
+
 const playAgain = document.querySelector('.play-again')
 
 headerTitle.innerHTML = 'Welcome to the world </br> traveler challenge!';
@@ -40,18 +38,13 @@ for (let i = 0; i < countryOptionsElements.length; i++) {
   answersContainer.removeChild(countryOptionsElements[i]);
 }
 function startGame() {
-  console.log('starting game;');
 
   countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
   countDisplay.style.color = 'rgba(255,255,255, 0.1)';
 
-  function playAgain(){
-  evaluateRightAnswer.classList.toggle('hidden');
-  }
   function selectContinent(event) {
     const button = event.target;
     const clickedContinent = Number(button.getAttribute('data-type'));
-    console.log(clickedContinent);
     if (clickedContinent === 0) {
       setTimeout(europe, 1000);
     }
@@ -74,10 +67,6 @@ function startGame() {
       selectContinent);
   }
 }
-
-//play again 
-
-
 
 function europe() {
   let europeQuestions = [
@@ -122,7 +111,6 @@ function europe() {
 
   function populateAnswers() {
     unshuffledPossibleAnswers = [];
-    console.log(currentQuestion.answer);
 
     unshuffledPossibleAnswers.push(currentQuestion.answer);
 
@@ -141,17 +129,16 @@ function europe() {
   }
 
   function startRound() {
-    // get one random question from europe questions by splicing it out of the Array. 
-    // splice random one:
+    
     randomQuestionIndex = randomIntergerUpto(europeQuestions.length - 1);
     currentQuestion = europeQuestions.splice(randomQuestionIndex, 1)[0];
 
     populateAnswers();
 
     const selectedQuestion = currentQuestion.question;
-    //display selected question
+    
     questionToGuessElement.innerHTML = selectedQuestion;
-    //display random country's names in the boxes
+    
     for (let i = 0; i < countryOptionsElements.length; i++) {
       const country = possibleAnswers[i];
       const countryOptionsElement = countryOptionsElements[i];
@@ -159,11 +146,10 @@ function europe() {
     }
 
   }
-  //check if clicked element corresponds to the right answer
+  
   function answerClick(event) {
     const button = event.target;
     const clickedIndex = Number(button.getAttribute('data-index'));
-    console.log(clickedIndex);
 
     if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
       evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
@@ -182,7 +168,6 @@ function europe() {
       setTimeout(function () {
         questionNumber.innerHTML = `${round}`;
       }, 2000);
-      console.log(`the score is ${score}`);
     } else {
       setTimeout(rank, 2000);
       setTimeout(clearPage, 2000);
@@ -196,14 +181,14 @@ function europe() {
     );
   }
 
-  //Restart game next question
+  
   function newQuestion() {
-    //remove selected question
+  
     questionToGuessElement.innerHTML = '';
-    //remove feedback box
+  
     evaluateRightAnswer.innerHTML = '';
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.1)';
-    // //remove countries from boxes
+  
     for (let i = 0; i < countryOptionsElements.length; i++) {
       countryOptionsElements[i].innerHTML = '';
     }
@@ -233,8 +218,6 @@ function europe() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
     countDisplay.style.color = 'rgba(255,255,255, 0.1)';
     holidayAudio.play();
-    playAgain.style.backgroundColor = 'rgba(240, 40, 100, 0.8)';
-    playAgain.innerHTML = 'Play Again';
   };
   playAgain.addEventListener('click', startGame);
   stylePage();
@@ -285,7 +268,6 @@ function america() {
 
   function populateAnswers() {
     unshuffledPossibleAnswers = [];
-    console.log(currentQuestion.answer);
 
     unshuffledPossibleAnswers.push(currentQuestion.answer);
 
@@ -324,7 +306,6 @@ function america() {
   function answerClick(event) {
     const button = event.target;
     const clickedIndex = Number(button.getAttribute('data-index'));
-    console.log(clickedIndex);
 
     if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
       evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
@@ -337,13 +318,12 @@ function america() {
 
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
     round += 1
-    // if round < 10
+
     if (round < 11) {
       setTimeout(newQuestion, 2000);
       setTimeout(function () {
         questionNumber.innerHTML = `${round}`;
       }, 2000);
-      console.log(`the score is ${score}`);
     } else {
       setTimeout(rank, 2000);
       setTimeout(clearPage, 2000);
@@ -395,13 +375,12 @@ function america() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
     countDisplay.style.color = 'rgba(255,255,255, 0.1)';
     holidayAudio.play();
-    playAgain.style.backgroundColor = 'rgba(240, 40, 100, 0.8)';
-    playAgain.innerHTML = 'Play Again';
+
   };
   stylePage();
   startRound();
 }
-//asia
+
 function asia() {
   let asiaQuestions = [
     { question: 'You can visit the land regarded by the Christian, Jewish and Muslim religious as the Holy Land, which country would you go?', answer: 'Israel' },
@@ -442,7 +421,6 @@ function asia() {
 
   function populateAnswers() {
     unshuffledPossibleAnswers = [];
-    console.log(currentQuestion.answer);
 
     unshuffledPossibleAnswers.push(currentQuestion.answer);
 
@@ -461,17 +439,16 @@ function asia() {
   }
 
   function startRound() {
-    // get one random question from europe questions by splicing it out of the Array. 
-    // splice random one:
+    
     randomQuestionIndex = randomIntergerUpto(asiaQuestions.length - 1);
     currentQuestion = asiaQuestions.splice(randomQuestionIndex, 1)[0];
 
     populateAnswers();
 
     const selectedQuestion = currentQuestion.question;
-    //display selected question
+   
     questionToGuessElement.innerHTML = selectedQuestion;
-    //display random country's names in the boxes
+   
     for (let i = 0; i < countryOptionsElements.length; i++) {
       const country = possibleAnswers[i];
       const countryOptionsElement = countryOptionsElements[i];
@@ -479,11 +456,10 @@ function asia() {
     }
 
   }
-  //check if clicked element corresponds to the right answer
+  
   function answerClick(event) {
     const button = event.target;
     const clickedIndex = Number(button.getAttribute('data-index'));
-    console.log(clickedIndex);
 
     if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
       evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
@@ -502,7 +478,6 @@ function asia() {
       setTimeout(function () {
         questionNumber.innerHTML = `${round}`;
       }, 2000);
-      console.log(`the score is ${score}`);
     } else {
       setTimeout(rank, 2000);
       setTimeout(clearPage, 2000);
@@ -517,21 +492,21 @@ function asia() {
     );
   }
 
-  //Restart game next question
+  
   function newQuestion() {
-    //remove selected question
+  
     questionToGuessElement.innerHTML = '';
-    //remove feedback box
+  
     evaluateRightAnswer.innerHTML = '';
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.1)';
-    // //remove countries from boxes
+   
     for (let i = 0; i < countryOptionsElements.length; i++) {
       countryOptionsElements[i].innerHTML = '';
     }
     startRound();
   }
 
-  //rank player
+  
   function rank() {
 
     if (score < 4) {
@@ -554,15 +529,11 @@ function asia() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
     countDisplay.style.color = 'rgba(255,255,255, 0.1)';
     holidayAudio.play();
-    playAgain.style.backgroundColor = 'rgba(240, 40, 100, 0.8)';
-    playAgain.innerHTML = 'Play Again';
   };
   stylePage();
   startRound();
 }
 
-
-//africa
 function africa() {
 
   let africaQuestions = [
@@ -594,7 +565,7 @@ function africa() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
     countDisplay.style.color = 'black';
     headerTitle.innerHTML = 'Africa';
-    questionToGuessElement.style.height = '60px';
+    questionToGuessElement.style.height = '80px';
     questionToGuessElement.style.padding = '20px';
     for (let i = 0; i < continentOptions.length; i++) {
       continentContainer.removeChild(continentOptions[i]);
@@ -603,7 +574,6 @@ function africa() {
 
   function populateAnswers() {
     unshuffledPossibleAnswers = [];
-    console.log(currentQuestion.answer);
 
     unshuffledPossibleAnswers.push(currentQuestion.answer);
 
@@ -622,17 +592,15 @@ function africa() {
   }
 
   function startRound() {
-    // get one random question from europe questions by splicing it out of the Array. 
-    // splice random one:
     randomQuestionIndex = randomIntergerUpto(africaQuestions.length - 1);
     currentQuestion = africaQuestions.splice(randomQuestionIndex, 1)[0];
 
     populateAnswers();
 
     const selectedQuestion = currentQuestion.question;
-    //display selected question
+    
     questionToGuessElement.innerHTML = selectedQuestion;
-    //display random country's names in the boxes
+   
     for (let i = 0; i < countryOptionsElements.length; i++) {
       const country = possibleAnswers[i];
       const countryOptionsElement = countryOptionsElements[i];
@@ -644,7 +612,6 @@ function africa() {
   function answerClick(event) {
     const button = event.target;
     const clickedIndex = Number(button.getAttribute('data-index'));
-    console.log(clickedIndex);
 
     if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
       evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
@@ -657,13 +624,12 @@ function africa() {
 
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
     round += 1
-    // if round < 10
+    
     if (round < 11) {
       setTimeout(newQuestion, 2000);
       setTimeout(function () {
         questionNumber.innerHTML = `${round}`;
       }, 2000);
-      console.log(`the score is ${score}`);
     } else {
       setTimeout(rank, 2000);
       setTimeout(clearPage, 2000);
@@ -678,14 +644,14 @@ function africa() {
     );
   }
 
-  //Restart game next question
+  
   function newQuestion() {
-    //remove selected question
+    
     questionToGuessElement.innerHTML = '';
-    //remove feedback box
+    
     evaluateRightAnswer.innerHTML = '';
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.1)';
-    // //remove countries from boxes
+    
     for (let i = 0; i < countryOptionsElements.length; i++) {
       countryOptionsElements[i].innerHTML = '';
     }
@@ -714,32 +680,27 @@ function africa() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
     countDisplay.style.color = 'rgba(255,255,255, 0.1)';
     holidayAudio.play();
-    playAgain.style.backgroundColor = 'rgba(240, 40, 100, 0.8)';
-    playAgain.innerHTML = 'Play Again';
   };
   stylePage();
   startRound();
 }
 
-//oceania
+
 function oceania() {
 
   let oceaniaQuestions = [
     { question: 'You can see Kangaroos and Koalas in their original habitat. Which country will you go?', answer: 'Australia' },
-    { question: 'You can greet the \'Kiwis\' and visit places where the \'Lord of the Rings\' thrilogy was filmed. Which country will you go?', answer: 'New Zealand' },
-    { question: 'You will visit one of the world\'s largest islands, that its also one of the least explored. Which country will you go?', answer: 'Papua New Guinea' },
-    { question: 'You can visit the most populated country in Africa and the Niger River. Which country will you go?', answer: 'Nigeria' },
-    { question: 'You can visit Mount Nimba, that rises above the savannah where this country meets with Guinea and Liberia. Which country will you go?', answer: 'Ivory Coast' },
-    { question: 'You can travel to the largest island in Africa - and the 4th largest in the world. Which country will you go?', answer: 'Madagascar' },
-    { question: 'You can visit the largest lake in Africa, Lake Victoria. Which country will you go?', answer: 'Zimbabwe' },
-    { question: 'You can meet the \'Big Five\' on a Safari at the country that was named after its highest Mount. Which country will you go?', answer: 'Kenya' },
-    { question: 'You can visit an archipelago of Islands in the center of the Atlantic Ocean that was a Portuguese colony. Which country will you go?', answer: 'Cabo Verde' },
-    { question: 'You can visit Casablanca, one of its most famous locations. Which country will you go?', answer: 'Morocco' },
-    { question: 'You can visit the Calahari Desert, that covers almost 80% of this country\'s territory. Which country will you go?', answer: 'Botswana' },
-    { question: 'You can visit the place where the famous Paris-Dakar rali use to end after crossing the Sahara Desert. Which country will you go?', answer: 'Senegal' },
-    { question: 'You can visit the endangered mountain gorillas at Ruwenzori Mountains. English and Swahili are the official languages. Which country will you go?', answer: 'Uganda' },
+    { question: 'You can greet the \'Kiwis\' and visit places where the \'Lord of the Rings\' was filmed. Which country will you go?', answer: 'New Zealand' },
+    { question: 'You will visit one of the world\'s largest islands, that is also one of the least explored. Which country will you go?', answer: 'Papua New Guinea' },
+    { question: 'You can visit the islands where a tourism acronym to its name was coined, the \'Fun In Jungle Island\'. Which country will you go?', answer: 'Fiji' },
+    { question: 'You can visit Bora-Bora, it\'s most famous destination. Which country will you go?', answer: 'French Polynesia' },
+    { question: 'You can travel to the group of Islands that form It’s the only nation in all 4 hemispheres of the world (North, South, East and West). Which country will you go?', answer: 'Kiribati' },
+    { question: 'You can travel to an island that is part of the United States. Where will you go?', answer: 'Guam' },
+    { question: 'You can see this former Anglo-French colony known as the New Hebrides - the name coined by Captain Cook, who explored the archipelago in 1774. Where will you go?', answer: 'Vanuatu' },
+    { question: 'You will visit a country in the Pacific Ocean located approximately midway between the islands of Hawaii and New Zealand. Which country will you go?', answer: 'Samoa' },
+    { question: 'You can visit a country - an archipelago of more than 170 islands in the South Pacific Ocean - where swimming is forbidden on sundays. Where will you go?', answer: 'Tonga' },
   ];
-  const oceaniaCountries = ['Australia', 'Papua New Guinea', 'New Zealand', 'Fiji', 'Samoa', 'Solomon Islands', 'Vanuatu', 'New Caledonia', 'French Polynesia', 'Samoa', 'Guam', 'Kiribati', 'Tonga', 'Micronesia', 'Tokelau', 'Nauru', 'Marshall Islands', 'American Samoa'];
+  const oceaniaCountries = ['Australia', 'Papua New Guinea', 'New Zealand', 'Fiji', 'Solomon Islands', 'Vanuatu', 'New Caledonia', 'French Polynesia', 'Samoa', 'Guam', 'Kiribati', 'Tonga', 'Micronesia', 'Tokelau', 'Nauru', 'Marshall Islands'];
   let randomQuestionIndex = 0;
   let currentQuestion = {};
   let possibleAnswers = [];
@@ -753,7 +714,7 @@ function oceania() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.8)';
     countDisplay.style.color = 'black';
     headerTitle.innerHTML = 'Oceania';
-    questionToGuessElement.style.height = '60px';
+    questionToGuessElement.style.height = '80px';
     questionToGuessElement.style.padding = '20px';
     for (let i = 0; i < continentOptions.length; i++) {
       continentContainer.removeChild(continentOptions[i]);
@@ -762,7 +723,6 @@ function oceania() {
 
   function populateAnswers() {
     unshuffledPossibleAnswers = [];
-    console.log(currentQuestion.answer);
 
     unshuffledPossibleAnswers.push(currentQuestion.answer);
 
@@ -781,17 +741,16 @@ function oceania() {
   }
 
   function startRound() {
-    // get one random question from europe questions by splicing it out of the Array. 
-    // splice random one:
+    
     randomQuestionIndex = randomIntergerUpto(oceaniaQuestions.length - 1);
     currentQuestion = oceaniaQuestions.splice(randomQuestionIndex, 1)[0];
 
     populateAnswers();
 
     const selectedQuestion = currentQuestion.question;
-    //display selected question
+    
     questionToGuessElement.innerHTML = selectedQuestion;
-    //display random country's names in the boxes
+    
     for (let i = 0; i < countryOptionsElements.length; i++) {
       const country = possibleAnswers[i];
       const countryOptionsElement = countryOptionsElements[i];
@@ -803,7 +762,7 @@ function oceania() {
   function answerClick(event) {
     const button = event.target;
     const clickedIndex = Number(button.getAttribute('data-index'));
-    console.log(clickedIndex);
+    
 
     if (possibleAnswers[clickedIndex] === currentQuestion.answer) {
       evaluateRightAnswer.innerHTML = 'Cooool. You have conquered it!';
@@ -816,13 +775,12 @@ function oceania() {
 
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.7)';
     round += 1
-    // if round < 10
+    
     if (round < 11) {
       setTimeout(newQuestion, 2000);
       setTimeout(function () {
         questionNumber.innerHTML = `${round}`;
       }, 2000);
-      console.log(`the score is ${score}`);
     } else {
       setTimeout(rank, 2000);
       setTimeout(clearPage, 2000);
@@ -837,14 +795,14 @@ function oceania() {
     );
   }
 
-  //Restart game next question
+  
   function newQuestion() {
-    //remove selected question
+  
     questionToGuessElement.innerHTML = '';
-    //remove feedback box
+  
     evaluateRightAnswer.innerHTML = '';
     evaluateRightAnswer.style.backgroundColor = 'rgba(255,255,255, 0.1)';
-    // //remove countries from boxes
+  
     for (let i = 0; i < countryOptionsElements.length; i++) {
       countryOptionsElements[i].innerHTML = '';
     }
@@ -853,7 +811,7 @@ function oceania() {
 
   function rank() {
 
-    if (score < 4) {
+    if (score < 10) {
       evaluateRightAnswer.innerHTML = `You\'ve got only ${score} right answers out of 10 😢 </br> Go on and get that old backpack for a ride. 🎒 </br> You deserve some travelling!😎`
     } else if (score < 7) {
       evaluateRightAnswer.innerHTML = `You\'ve got ${score} right answers out of 10. </br> Good on you! 🙌 We\'ve seen that you\'ve been around!! 😉`
@@ -873,15 +831,14 @@ function oceania() {
     countDisplay.style.backgroundColor = 'rgba(255,255,255, 0.1)';
     countDisplay.style.color = 'rgba(255,255,255, 0.1)';
     holidayAudio.play();
-    playAgain.style.backgroundColor = 'rgba(240, 40, 100, 0.8)';
-    playAgain.innerHTML = 'Play Again';
+    
   };
   stylePage();
   startRound();
 }
 
 startGame();
-// helper functions
+
 
 function randomIntergerUpto(max) {
   return Math.floor(Math.random() * (max + 1));
@@ -892,13 +849,13 @@ function randomIntergerUpto(max) {
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
+  
   while (0 !== currentIndex) {
 
-    // Pick a remaining element...
+    
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-    // And swap it with the current element.
+    
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
